@@ -12,6 +12,30 @@ function Home() {
   );
 }
 
+// Game 화면
+function Game() {
+    return (
+        <div>
+            <div className='game_message'>
+                <div>안내면</div>
+                <input
+                type="text"
+                defaultValue="술래">
+                </input>
+                <span>❗️</span>
+            </div>
+            <div className='game_player'>
+                <span>YOU </span>
+                <span>COMPUTER</span>
+            </div>
+
+        </div>
+      );
+}
+
+
+
+
 function App() {
   return (
     <BrowserRouter>
