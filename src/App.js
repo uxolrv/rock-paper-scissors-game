@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 // Home 화면
@@ -13,6 +12,7 @@ function Home() {
   );
 }
 
+
 // Game 화면
 function Game() {
   const [computerChoice, setComputerChoice] = useState("✌️");
@@ -23,8 +23,6 @@ function Game() {
   const [blockedBtn, setBlockedBtn] = useState(false); // 버튼 비활성화
 
   const interval = useRef();
-  
-  const rps = ["✊", "🖐", "✌️"]
 
   const scores = {
     "✊": 1,
@@ -32,9 +30,9 @@ function Game() {
     "✌️": -1
   };
 
+
   /*
   지는 경우
-
   <컴>    <나>
   바위  :  가위   =>  1 - -1 = 2
    보  :  바위   =>   0 - 1 = -1
@@ -47,6 +45,7 @@ function Game() {
    보  :  가위   =>  0 - -1 = 1
   */
 
+
   const changeComputerChoice = () => {
     if (computerChoice === "✌️") {
       setComputerChoice("✊")
@@ -57,8 +56,9 @@ function Game() {
     }
   };
 
+
   useEffect(()=>{
-    interval.current = setInterval(changeComputerChoice, 300)
+    interval.current = setInterval(changeComputerChoice, 80)
     return () => {
       clearInterval(interval.current)
     };
@@ -69,37 +69,26 @@ function Game() {
     clearInterval(interval.current);
     setBlockedBtn(true);
     setYourChoice(choice);
-    let difference = scores[choice] + scores[computerChoice]
-    // 만약 한판 경기를 했다면
-    // 이제 computerChoice는 랜덤!
+    let difference = scores[choice] - scores[computerChoice]
 
-
-    // if (message !== "") {
-    //   setComputerChoice(rps[Math.floor(Math.random() * rps.length)])
-    // }
-
-    console.log(difference)
     if(difference === 0) {
       setMessage("비겼어요!")
-      console.log("동점이샤ㅕ요")
+
     } else if (difference === -2 || difference === 1) {
-      console.log("이겻어요")
-      setMessage("이겼어요!")
-    } else {
-      console.log("졋어요")
       setMessage("졌어요!")
+      setComputerScore(computerScore + 1)
+
+    } else {
+      setMessage("이겼어요!")
+      setYourScore(yourScore + 1)
     }
 
     // 1초 후 다시 게임 가능
     setTimeout(() => {
-      interval.current = setInterval(changeComputerChoice, 300);
-
+      interval.current = setInterval(changeComputerChoice, 80);
         setBlockedBtn(false)
-
     }, 1000)
-
   }
-
 
     return (
         <div>
@@ -112,13 +101,14 @@ function Game() {
                 <span>❗️</span>
             </div>
             <div className='game_player'>
+                <span>YOU </span>
+                <span>COMPUTER</span>
               <div className='you'>
                 <div>YOU</div>
                 <div>{handleBtnClick ? yourChoice : null}</div>
                 <button disabled={blockedBtn} onClick={(e) => handleBtnClick("✌️")}>✌️</button>
                 <button disabled={blockedBtn} onClick={(e) => handleBtnClick("✊")}>✊</button>
                 <button disabled={blockedBtn} onClick={(e) => handleBtnClick("🖐")}>🖐</button>
-                {/* {rps.map(el => <button onClick={handleBtnClick}>{el}</button>)} */}
               </div>
               <div className='com'>
                 <div>COMPUTER</div>
@@ -127,19 +117,15 @@ function Game() {
               <div className='result'>
                 <div>{message}</div>
               </div>
-
             </div>
-
         </div>
-      );
+    );
 }
-
-
 
 
 function App() {
   return (
-    <BrowserRouter>
+  <BrowserRouter>
     <div>
       <Routes>
         <Route path="/" element={<Home />} /> 
