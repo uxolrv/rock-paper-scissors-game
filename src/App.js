@@ -42,13 +42,20 @@ const StartBtn = styled.button`
 
   &:hover {
     background-color: #FDC638;
+    font-size: 2.2rem;
   }
 `
 
 const HomeBtn = styled(StartBtn) `
   font-size: 1rem;
   padding: 10px 20px;
-  margin-top: 90px;
+  position: absolute;
+  bottom: 70px;
+  left: 675px;
+  &:hover {
+    background-color: #FDC638;
+    font-size: 1.1rem;
+  }
 `
 
 const GamePage = styled.div`
@@ -62,7 +69,7 @@ const GamePage = styled.div`
 const GameMessage = styled.div`
   display: flex;
   align-items: center;
-  margin-top: 150px;
+  margin-top: 130px;
 
 > input {
   text-align: center;
@@ -144,7 +151,7 @@ const GameResult = styled.div`
 
   .score{
     margin-top: 10px;
-    color: rgba(0,0,0,0.8)
+    color: rgba(0,0,0,0.8);
   }
 `
 
