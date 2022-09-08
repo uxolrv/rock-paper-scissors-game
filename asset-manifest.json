@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/rock-paper-scissors-game/static/js/main.d84f29f5.js",
+    "index.html": "/rock-paper-scissors-game/index.html",
+    "main.d84f29f5.js.map": "/rock-paper-scissors-game/static/js/main.d84f29f5.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.d84f29f5.js"
+  ]
+}
