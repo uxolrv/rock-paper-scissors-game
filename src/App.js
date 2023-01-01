@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import styled, { createGlobalStyle } from 'styled-components';
-import reset from 'styled-reset'
+import styled, { createGlobalStyle } from "styled-components";
+import reset from "styled-reset";
 
-
-const GlobalStyles = createGlobalStyle `
+const GlobalStyles = createGlobalStyle`
 ${reset}
   * {
   box-sizing : border-box;
@@ -13,7 +12,7 @@ ${reset}
     font-family: 'Do Hyeon', sans-serif;
     color: rgba(0,0,0,0.9)
   }
-`
+`;
 
 const HomePage = styled.div`
   display: flex;
@@ -27,13 +26,13 @@ const HomePage = styled.div`
   > h1 {
     margin-bottom: 18px;
   }
-`
+`;
 
 const StartBtn = styled.button`
-  background-color: #376EFD;
+  background-color: #376efd;
   border: none;
   border-radius: 30px;
-  font-family: 'Righteous', cursive;
+  font-family: "Righteous", cursive;
   font-size: 2rem;
   padding: 13px 27px;
   color: white;
@@ -41,22 +40,22 @@ const StartBtn = styled.button`
   margin-top: 20px;
 
   &:hover {
-    background-color: #FDC638;
+    background-color: #fdc638;
     font-size: 2.2rem;
   }
-`
+`;
 
-const HomeBtn = styled(StartBtn) `
+const HomeBtn = styled(StartBtn)`
   font-size: 1rem;
   padding: 10px 20px;
   position: absolute;
   bottom: 70px;
   left: 675px;
   &:hover {
-    background-color: #FDC638;
+    background-color: #fdc638;
     font-size: 1.1rem;
   }
-`
+`;
 
 const GamePage = styled.div`
   display: flex;
@@ -65,31 +64,31 @@ const GamePage = styled.div`
   width: 100vw;
   height: 100vh;
   font-size: 3.5rem;
-`
+`;
 const GameMessage = styled.div`
   display: flex;
   align-items: center;
   margin-top: 130px;
 
-> input {
-  text-align: center;
-  width: 200px;
-  height: 65px;
-  margin: 0px 30px;
-  border: none;
-  border-bottom: 6px solid #376EFD;
-  font-family: 'Do Hyeon', sans-serif;
-  font-size: 3.8rem;
-  outline: none;
-  color: rgba(0,0,0,0.9);
-}
-`
+  > input {
+    text-align: center;
+    width: 200px;
+    height: 65px;
+    margin: 0px 30px;
+    border: none;
+    border-bottom: 6px solid #376efd;
+    font-family: "Do Hyeon", sans-serif;
+    font-size: 3.8rem;
+    outline: none;
+    color: rgba(0, 0, 0, 0.9);
+  }
+`;
 
 const GamePlayer = styled.div`
   display: flex;
   width: 60%;
   margin-top: 120px;
-`
+`;
 
 const You = styled.div`
   display: flex;
@@ -97,15 +96,15 @@ const You = styled.div`
   flex-direction: column;
   width: 33%;
 
-  .name{
+  .name {
     font-size: 3rem;
     margin-bottom: 40px;
   }
 
-  .choice{
+  .choice {
     font-size: 8rem;
   }
-`
+`;
 
 const Computer = styled.div`
   display: flex;
@@ -113,48 +112,47 @@ const Computer = styled.div`
   flex-direction: column;
   width: 33%;
 
-  .name{
+  .name {
     font-size: 3rem;
     margin-bottom: 40px;
   }
 
-  .choice{
+  .choice {
     font-size: 8rem;
   }
-`
+`;
 
 const Buttons = styled.div`
   padding-top: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;
 
 const Btn = styled.button`
   border: none;
   background: none;
   font-size: 3rem;
 
-  &:hover{
+  &:hover {
     font-size: 3.5rem;
   }
-`
+`;
 
 const GameResult = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  color: #376EFD;
+  color: #376efd;
   font-size: 2.3rem;
   width: 33%;
 
-  .score{
+  .score {
     margin-top: 10px;
-    color: rgba(0,0,0,0.8);
+    color: rgba(0, 0, 0, 0.8);
   }
-`
-
+`;
 
 // Home 화면
 function Home() {
@@ -162,11 +160,12 @@ function Home() {
     <HomePage>
       <h1>안내면 술래</h1>
       <h1>✌️✊🖐</h1>
-      <Link to="/rsp"><StartBtn>start</StartBtn></Link>
+      <Link to="/rsp">
+        <StartBtn>start</StartBtn>
+      </Link>
     </HomePage>
   );
 }
-
 
 // Game 화면
 function Game() {
@@ -182,7 +181,7 @@ function Game() {
   const scores = {
     "✊": 1,
     "🖐": 0,
-    "✌️": -1
+    "✌️": -1,
   };
 
   /*
@@ -201,94 +200,96 @@ function Game() {
 
   const changeComputerChoice = () => {
     if (computerChoice === "✌️") {
-      setComputerChoice("✊")
+      setComputerChoice("✊");
     } else if (computerChoice === "✊") {
-      setComputerChoice("🖐")
+      setComputerChoice("🖐");
     } else if (computerChoice === "🖐") {
-      setComputerChoice("✌️")
+      setComputerChoice("✌️");
     }
   };
 
-
-  useEffect(()=>{
-    interval.current = setInterval(changeComputerChoice, 80)
+  useEffect(() => {
+    interval.current = setInterval(changeComputerChoice, 80);
     return () => {
-      clearInterval(interval.current)
+      clearInterval(interval.current);
     };
-  },[computerChoice])
-
+  }, [computerChoice]);
 
   const handleBtnClick = (choice) => {
     clearInterval(interval.current);
     setBlockedBtn(true);
     setYourChoice(choice);
-    let difference = scores[choice] - scores[computerChoice]
+    let difference = scores[choice] - scores[computerChoice];
 
-    if(difference === 0) {
-      setMessage("비겼어요!")
-
+    if (difference === 0) {
+      setMessage("비겼어요!");
     } else if (difference === -2 || difference === 1) {
-      setMessage("졌어요!")
-      setComputerScore(computerScore + 1)
-
+      setMessage("졌어요!");
+      setComputerScore(computerScore + 1);
     } else {
-      setMessage("이겼어요!")
-      setYourScore(yourScore + 1)
+      setMessage("이겼어요!");
+      setYourScore(yourScore + 1);
     }
 
     // 1초 후 다시 게임 가능
     setTimeout(() => {
       interval.current = setInterval(changeComputerChoice, 80);
-        setBlockedBtn(false)
-    }, 1000)
-  }
+      setBlockedBtn(false);
+    }, 1000);
+  };
 
-    return (
-        <GamePage>
-            <GameMessage>
-                <div>안내면</div>
-                <input
-                type="text"
-                defaultValue="술래">
-                </input>
-                <span>❗️</span>
-            </GameMessage>
-            <GamePlayer>
-              <You>
-                <div className='name'>YOU</div>
-                <div className='choice'>{handleBtnClick ? yourChoice : null}</div>
-                <Buttons>
-                  <Btn disabled={blockedBtn} onClick={(e) => handleBtnClick("✌️")}>✌️</Btn>
-                  <Btn disabled={blockedBtn} onClick={(e) => handleBtnClick("✊")}>✊</Btn>
-                  <Btn disabled={blockedBtn} onClick={(e) => handleBtnClick("🖐")}>🖐</Btn>
-                </Buttons>
-              </You>
-              <GameResult>
-                <div>{message}</div>
-                <div className='score'>{yourScore} : {computerScore}</div>
-              </GameResult>
-              <Computer>
-                <div className='name'>COMPUTER</div>
-                <div className='choice'>{computerChoice}</div>
-              </Computer>
-            </GamePlayer>
-            <Link to="/"><HomeBtn>HOME</HomeBtn></Link> 
-        </GamePage>
-      );
+  return (
+    <GamePage>
+      <GameMessage>
+        <div>안내면</div>
+        <input type="text" defaultValue="술래"></input>
+        <span>❗️</span>
+      </GameMessage>
+      <GamePlayer>
+        <You>
+          <div className="name">YOU</div>
+          <div className="choice">{handleBtnClick ? yourChoice : null}</div>
+          <Buttons>
+            <Btn disabled={blockedBtn} onClick={(e) => handleBtnClick("✌️")}>
+              ✌️
+            </Btn>
+            <Btn disabled={blockedBtn} onClick={(e) => handleBtnClick("✊")}>
+              ✊
+            </Btn>
+            <Btn disabled={blockedBtn} onClick={(e) => handleBtnClick("🖐")}>
+              🖐
+            </Btn>
+          </Buttons>
+        </You>
+        <GameResult>
+          <div>{message}</div>
+          <div className="score">
+            {yourScore} : {computerScore}
+          </div>
+        </GameResult>
+        <Computer>
+          <div className="name">COMPUTER</div>
+          <div className="choice">{computerChoice}</div>
+        </Computer>
+      </GamePlayer>
+      <Link to="/">
+        <HomeBtn>HOME</HomeBtn>
+      </Link>
+    </GamePage>
+  );
 }
-
 
 function App() {
   return (
-  <BrowserRouter>
-    <GlobalStyles />
-    <div>
-      <Routes>
-        <Route path="/" element={<Home />} /> 
-        <Route path="/rsp" element={<Game />} />
-      </Routes>
-    </div>
-  </BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <GlobalStyles />
+      <div>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/rsp" element={<Game />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
